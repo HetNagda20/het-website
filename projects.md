@@ -1,25 +1,25 @@
 ---
 name: Projects
 title: Projects & Case Studies
-photo: ../photos/portrait3.jpg
+photo: ../photos/projects.jpg
 ---
 
-# Projects
+# Projects & Case Studies
 
-Here’s a selection of work I’ve done across **AI, systems, and full-stack development**.  
+Here’s a selection of work I’ve done across **AI, systems, and full-stack development**.
 Each one pushed me to learn something new and build tools that are both usable and reliable.
 
 ---
 
-## 🤖 Conversational LLM Agent with AWS Microservices (Fall 2024)
-A full-stack conversational AI agent integrating a **locally hosted Ollama model** with **AWS Bedrock**, orchestrated via microservices.  
-**Stack:** AWS (EC2, Lambda, S3, API Gateway), Akka HTTP, Protobuf, Ollama  
+## 🤖 Conversational LLM Agent with AWS Microservices (Fall 2024) {#llm-agent}
+A full-stack conversational AI agent integrating a **locally hosted Ollama** model with **AWS Bedrock**, orchestrated via microservices.  
+**Stack:** AWS (EC2, Lambda, S3, API Gateway), Akka HTTP, Protobuf, Ollama
 
-- Integrated a locally hosted Ollama model with Bedrock for hybrid inference.  
-- Built **Akka HTTP microservices** to serialize requests via Protobuf for efficient cloud communication.  
-- Deployed Lambda functions via S3 and exposed them with **API Gateway** for RESTful interaction with EC2-hosted services.  
+- Integrated a locally hosted Ollama model with Bedrock for hybrid inference.
+- Built **Akka HTTP** microservices with **Protobuf** serialization for efficient cloud comms.
+- Deployed **Lambda** via S3 and exposed via **API Gateway** to talk to EC2 services.
 
-👉 *Takeaway:* Learned how to **blend local + cloud LLMs** with scalable microservices, while keeping communication efficient and reliable.
+👉 *Takeaway:* Blending **local + cloud** LLMs with scalable microservices.
 
 ---
 
