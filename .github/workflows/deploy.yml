@@ -17,16 +17,43 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install || true  # skips if you don't have package.json deps
+      - name: Install deps (ok if none)
+        run: npm install || true
 
       - name: Build site
         run: npx @11ty/eleventy
 
+      # Add a root index if your Eleventy build didn't create one.
+      # If you already have index.html in source and Eleventy copies it, this step is harmless.
+      - name: Ensure root index.html redirects to /home/
+        run: |
+          mkdir -p _site
+          if [ ! -f "_site/index.html" ]; then
+            cat > _site/index.html <<'HTML'
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Het Rajesh Nagda — MSCS @ UIC</title>
+    <meta http-equiv="refresh" content="0; url=./home/">
+    <link rel="canonical" href="./home/">
+  </head>
+  <body>
+    <p>Redirecting to <a href="./home/">home</a>…</p>
+  </body>
+</html>
+HTML
+          fi
+
       - name: Add .nojekyll
         run: touch _site/.nojekyll
 
-      - name: Deploy to GitHub Pages
+      - name: Show what will be deployed (debug)
+        run: |
+          echo "=== _site contents ==="
+          find _site -maxdepth 2 -type f -print
+
+      - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
