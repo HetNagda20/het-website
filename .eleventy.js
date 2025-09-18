@@ -1,15 +1,19 @@
-const now = String(Date.now())
+module.exports = function(eleventyConfig) {
+  // Copy static folders as-is -> _site/
+  eleventyConfig.addPassthroughCopy("styles");
+  eleventyConfig.addPassthroughCopy("photos");
+  eleventyConfig.addPassthroughCopy("files");
+  eleventyConfig.addPassthroughCopy("circle.svg");
 
-module.exports = function (eleventyConfig) {
-  eleventyConfig.addWatchTarget('./styles/tailwind.config.js')
-  eleventyConfig.addWatchTarget('./styles/tailwind.css')
-
-  eleventyConfig.addPassthroughCopy({ './_tmp/style.css': './style.css' })
-  eleventyConfig.addPassthroughCopy('./*.svg')
-  eleventyConfig.addPassthroughCopy('./*.html')
-  eleventyConfig.addPassthroughCopy('./photos/*.jpg')
-
-  eleventyConfig.addShortcode('version', function () {
-    return now
-  })
+  return {
+    dir: {
+      input: ".",        // your current source root
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
+    },
+    // <<< IMPORTANT for GitHub Pages project site: set your repo name here >>>
+    // If your repo is "het-website", use "/het-website/". If it's "myWebsite", use "/myWebsite/".
+    pathPrefix: "/het-website/"
+  };
 };
