@@ -1,0 +1,15 @@
+
+{
+  "name": "Het Rajesh Nagda",
+  "title": "Graduate Student • Software Engineer",
+  "email": "hnagd@uic.edu",
+  "portrait": "../photos/portrait3.jpg",
+  "siteTitle": "Het Rajesh Nagda — MSCS @ UIC",
+  "siteDescription": "Graduate CS student at UIC (May 2026). Ex-Accenture SWE. Building scalable data systems, AI-driven products, and cloud microservices. Preparing for SDE roles.",
+  "location": "Chicago, IL",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/hetnagda20/",
+    "github": "https://github.com/HetNagda20",
+    "email": "mailto:hnagd@uic.edu"
+  }
+}
