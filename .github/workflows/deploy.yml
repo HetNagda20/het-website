@@ -5,30 +5,77 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+# Needed so the workflow can push to gh-pages
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Use Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
 
-      - name: Install deps (skip if none)
-        run: npm install || true
+      # Install deps if you have them; if not, this will no-op
+      - name: Install dependencies
+        run: npm ci || npm install || true
 
-      - name: Build site
-        run: npx @11ty/eleventy
+      # Build your site. If you have a "build" script in package.json, it will run;
+      # otherwise it falls back to plain Eleventy.
+      - name: Build (Eleventy)
+        run: |
+          if [ -f package.json ] && jq -e '.scripts.build' package.json > /dev/null 2>&1; then
+            npm run build
+          else
+            npx @11ty/eleventy
+          fi
 
+      # Make sure GitHub Pages doesn’t treat it as a Jekyll site (which hides underscored paths)
       - name: Add .nojekyll
         run: touch _site/.nojekyll
 
-      - name: Deploy
+      # Ensure there is a root index.html so / loads (redirects to /home/)
+      - name: Ensure root index.html
+        run: |
+          mkdir -p _site
+          if [ ! -f "_site/index.html" ]; then
+            cat > _site/index.html <<'HTML'
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Het Rajesh Nagda — MSCS @ UIC</title>
+    <meta http-equiv="refresh" content="0; url=./home/">
+    <link rel="canonical" href="./home/">
+  </head>
+  <body>
+    <p>Redirecting to <a href="./home/">home</a>…</p>
+  </body>
+</html>
+HTML
+          fi
+
+      # Optional: list what we’re about to deploy (handy for debugging)
+      - name: Show _site contents
+        run: |
+          echo "=== _site (top-level) ==="
+          find _site -maxdepth 2 -type f -print
+
+      # Publish to gh-pages
+      - name: Deploy to GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
           publish_dir: ./_site
+          publish_branch: gh-pages
