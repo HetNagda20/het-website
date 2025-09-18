@@ -1,5 +1,5 @@
 module.exports = function(eleventyConfig) {
-  // Copy static folders as-is -> _site/
+  // Copy static assets into _site
   eleventyConfig.addPassthroughCopy("styles");
   eleventyConfig.addPassthroughCopy("photos");
   eleventyConfig.addPassthroughCopy("files");
@@ -7,13 +7,11 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: {
-      input: ".",        // your current source root
+      input: ".",
       includes: "_includes",
       data: "_data",
       output: "_site"
     },
-    // <<< IMPORTANT for GitHub Pages project site: set your repo name here >>>
-    // If your repo is "het-website", use "/het-website/". If it's "myWebsite", use "/myWebsite/".
-    pathPrefix: "/het-website/"
+    pathPrefix: "/het-website/"   
   };
 };
