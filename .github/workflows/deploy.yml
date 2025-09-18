@@ -8,10 +8,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: pages-deploy
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,18 +20,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
 
-      - name: Install dependencies
-        run: npm ci || npm install || true
+      # Install Eleventy globally so the build step works
+      - name: Install Eleventy
+        run: npm install -g @11ty/eleventy
 
       - name: Build (Eleventy)
-        run: |
-          if [ -f package.json ] && jq -e '.scripts.build' package.json > /dev/null 2>&1; then
-            npm run build
-          else
-            npx @11ty/eleventy
-          fi
+        run: eleventy
 
       - name: Add .nojekyll
         run: touch _site/.nojekyll
@@ -59,9 +50,7 @@ jobs:
           fi
 
       - name: Show _site contents
-        run: |
-          echo "=== _site (top-level) ==="
-          find _site -maxdepth 2 -type f -print
+        run: find _site -maxdepth 2 -type f -print
 
       - name: Deploy to GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v3
