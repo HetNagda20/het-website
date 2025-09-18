@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Projects &amp; Case Studies Projects
+    </title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+    <link rel="stylesheet" href="../style.css?v=1758171301309" type="text/css"/>
+  </head>
+  <body class="bg-uicblue">
+    <div class="bg-uicblue grid place-items-center">
+      <div id="main-panel" class="shadow-inner shadow-2xl relative bg-white max-w-4xl pb-10">
+        <div id="top-bar" class="fixed z-10 text-uicblue max-w-4xl justify-between items-end p-2 flex flex-row text-center uppercase font-medium bg-white w-full">
+          <a id="logo-link" class="basis-1/3" href="https://www.uic.edu/">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.3167 68.6566">
+              <title>University of Illinois Chicago</title>
+              <!-- UIC Logo paths remain unchanged -->
+            </svg>
+          </a>
+          <a class="shrink text-sm" href="../home/index.html">home</a>
+          <a class="shrink text-sm" href="../projects/index.html">projects</a>
+          <a class="shrink text-sm" href="../home/index.html#contact">contact</a>
+        </div>
+        <div id="portrait-group" class="relative max-w-4xl mb-4">
+          <div id="portrait" style="background-image: url(../photos/portrait3.jpg);" class="object-contain h-[50vh] bg-cover">&nbsp;</div>
+          <img id="circlemark" class="absolute bottom-0 left-6 w-24" src="../circle.svg"/>
+          <div id="name-title" class="relative mr-5 text-right" style="line-height: 12px">
+            <span class="font-bold text-lg">Projects</span><br/>
+            <span class="text-base font-normal"> Projects &amp; Case Studies</span>
+          </div>
+        </div>
+
+        <div id="content" class="text-justify mx-8 text-base">      
+          <h1>Projects</h1>
+<p>Here’s a selection of work I’ve done across <strong>AI, systems, and full-stack development</strong>.<br>
+Each one pushed me to learn something new and build tools that are both usable and reliable.</p>
+<hr>
+<h2>🤖 Conversational LLM Agent with AWS Microservices (Fall 2024)</h2>
+<p>A full-stack conversational AI agent integrating a <strong>locally hosted Ollama model</strong> with <strong>AWS Bedrock</strong>, orchestrated via microservices.<br>
+<strong>Stack:</strong> AWS (EC2, Lambda, S3, API Gateway), Akka HTTP, Protobuf, Ollama</p>
+<ul>
+<li>Integrated a locally hosted Ollama model with Bedrock for hybrid inference.</li>
+<li>Built <strong>Akka HTTP microservices</strong> to serialize requests via Protobuf for efficient cloud communication.</li>
+<li>Deployed Lambda functions via S3 and exposed them with <strong>API Gateway</strong> for RESTful interaction with EC2-hosted services.</li>
+</ul>
+<p>👉 <em>Takeaway:</em> Learned how to <strong>blend local + cloud LLMs</strong> with scalable microservices, while keeping communication efficient and reliable.</p>
+<hr>
+<h2>🎮 Game-Based Learning for Traffic Signs</h2>
+<p>An interactive driving simulation that gamifies road safety education.<br>
+<strong>Stack:</strong> Unity, C#, Physics Engine</p>
+<ul>
+<li>Built physics-based vehicle controls + adaptive difficulty.</li>
+<li>Implemented scoring + real-time feedback to boost engagement.</li>
+<li>Used in classrooms with <strong>300+ students</strong>, with a data-logging system for teachers.</li>
+</ul>
+<p>👉 <em>Takeaway:</em> Blending <strong>game design + education</strong> taught me how feedback loops can make learning stick.</p>
+<hr>
+<h2>🏭 Garment Management System</h2>
+<p>A full-stack inventory and billing system for small manufacturers.<br>
+<strong>Stack:</strong> Django, Python, JavaScript, SQL/NoSQL</p>
+<ul>
+<li>Real-time tracking of raw materials, invoices, and sales.</li>
+<li>Integrated robust reporting features for financial + inventory insights.</li>
+<li>Designed a UI usable even by non-technical staff.</li>
+</ul>
+<p>👉 <em>Takeaway:</em> Gave me early experience in <strong>end-to-end system design</strong> and taught me the value of usability.</p>
+<hr>
+<h1>✨ More to Come</h1>
+<p>I’m actively working on projects around <strong>databases, query processing, and systems infra</strong> as part of my grad studies at UIC.<br>
+Stay tuned 👀</p>
+
+        </div>
+      </div>
+    </div>
+    <script>
+      var startE=0;
+      document.getElementById('portrait').addEventListener('touchstart', e=>{startE=e.changedTouches[0].screenX;});
+      document.getElementById('portrait').addEventListener('touchend', e=>{ 
+        if(e.changedTouches[0].screenX < startE) {
+          document.getElementById('portrait').style.backgroundImage = "url('../photos/family.jpg')";
+        }
+      });
+    </script>
+  </body>
+</html>
