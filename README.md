@@ -11,3 +11,4 @@ To use this as a template, start by updatin the settings in `_data/defaults.json
 
 To try it out, run `npm start` in the main folder, and open your website in a browser using the URL `localhost:8080`. 
 The `Makefile` contains a handy target for uploading your site to your Computer Science department `WWW` folder. Works for me, but your YMMV as that's a pretty outdated system.# myWebsite
+# het-website
