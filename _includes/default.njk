@@ -1,48 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>
-      {{title|default(defaults.title)}} {{name|default(defaults.name)}}
-    </title>
+    <title>{{ title | default(defaults.title) }} {{ name | default(defaults.name) }}</title>
     <meta charset="UTF-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
-    <link rel="stylesheet" href="{{ '/style.css' | url }}" type="text/css"/>
+
+    <!-- If you have a built CSS file, point to it with |url -->
+    <link rel="stylesheet" href="{{ '/styles/tailwind.css' | url }}" type="text/css"/>
+
+    <!-- Inline CSS to make layout clean even without a build step -->
+    <style>
+      :root { --uic:#001e62; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb; }
+      html, body { background: var(--uic); color: var(--ink); }
+      body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+      #main-panel{ margin:96px auto 48px; max-width:960px; border-radius:16px; overflow:hidden; box-shadow:0 6px 28px rgba(0,0,0,.08); }
+      #top-bar{ position:sticky; top:0; border-bottom:1px solid var(--line); background:rgba(255,255,255,.92); backdrop-filter:blur(6px); padding:10px 14px; gap:10px; }
+      #top-bar a{ padding:8px 12px; border-radius:999px; text-decoration:none; }
+      #top-bar a:hover{ background:#eef3ff; text-decoration:none; }
+
+      #portrait-group{ margin-bottom:8px; position:relative; }
+      #portrait{ height:360px; background-size:cover; background-position:center; border-bottom:1px solid var(--line); }
+      #circlemark{ width:84px; left:20px; bottom:12px; opacity:.95; }
+      #name-title{ position:absolute; right:20px; bottom:16px; background:rgba(255,255,255,.92); padding:10px 14px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+      #name-title span:first-child{ font-size:1.125rem; letter-spacing:.2px; }
+      #name-title span:last-child{ color:var(--muted); }
+
+      #content{ max-width:820px; margin:0 auto; padding:24px 20px 48px; line-height:1.7; }
+      #content h1{ margin:12px 0 10px; font-size:1.9rem; letter-spacing:.2px; }
+      #content h2{ margin:26px 0 8px; font-size:1.3rem; }
+      #content p{ margin:8px 0 10px; }
+      #content ul{ margin:10px 0 14px 22px; }
+      #content li{ margin:4px 0; }
+      #content a{ color:var(--uic); text-decoration:none; font-weight:600; border-bottom:1px solid transparent; }
+      #content a:hover{ text-decoration:underline; }
+
+      .project{ border:1px solid var(--line); border-radius:14px; padding:14px 14px 10px; margin:12px 0 16px; background:#fff; }
+      .project h3{ margin:0 0 6px; font-size:1.05rem; }
+      .stack{ display:inline-block; font-size:.83rem; color:var(--muted); margin-bottom:6px; }
+
+      .tag{ display:inline-block; font-size:.78rem; line-height:1; padding:6px 8px; margin:0 6px 6px 0; background:#f3f4f6; border:1px solid var(--line); border-radius:999px; font-weight:600; color:#374151; }
+      .project{ border-left:4px solid transparent; }
+      .project--ai{  border-left-color:#2563eb; }
+      .project--edu{ border-left-color:#16a34a; }
+      .project--biz{ border-left-color:#d97706; }
+
+      .quick-links a{ display:inline-block; padding:8px 12px; margin:6px 8px 0 0; border:1px solid var(--line); border-radius:999px; text-decoration:none; font-weight:600; }
+      .quick-links a:hover{ background:#f8fafc; }
+
+      #contact{ border-top:1px solid var(--line); margin-top:28px; padding-top:18px; }
+      #contact a{ text-decoration:none; } #contact a:hover{ text-decoration:underline; }
+    </style>
   </head>
+
   <body class="bg-uicblue">
     <div class="bg-uicblue grid place-items-center">
       <div id="main-panel" class="shadow-inner shadow-2xl relative bg-white max-w-4xl pb-10">
         <div id="top-bar" class="fixed z-10 text-uicblue max-w-4xl justify-between items-end p-2 flex flex-row text-center uppercase font-medium bg-white w-full">
           <a id="logo-link" class="basis-1/3" href="https://www.uic.edu/">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.3167 68.6566">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.3167 68.6566" aria-label="University of Illinois Chicago logo">
               <title>University of Illinois Chicago</title>
-              <!-- UIC Logo paths remain unchanged -->
+              <!-- (logo paths) -->
             </svg>
           </a>
           <a class="shrink text-sm" href="{{ '/home/' | url }}">home</a>
           <a class="shrink text-sm" href="{{ '/projects/' | url }}">projects</a>
           <a class="shrink text-sm" href="{{ '/home/#contact' | url }}">contact</a>
         </div>
+
         <div id="portrait-group" class="relative max-w-4xl mb-4">
-          <div id="portrait" style="background-image: url({{photo|default(defaults.portrait)}});" class="object-contain h-[50vh] bg-cover">&nbsp;</div>
+          <div id="portrait"
+               style="background-image: url('{{ (photo | default(defaults.portrait)) | url }}');"
+               class="object-contain h-[50vh] bg-cover">&nbsp;</div>
+
           <img id="circlemark" class="absolute bottom-0 left-6 w-24" src="{{ '/circle.svg' | url }}"/>
+
           <div id="name-title" class="relative mr-5 text-right" style="line-height: 12px">
-            <span class="font-bold text-lg">{{name|default(defaults.name)}}</span><br/>
-            <span class="text-base font-normal"> {{title|default(defaults.title)}}</span>
+            <span class="font-bold text-lg">{{ name | default(defaults.name) }}</span><br/>
+            <span class="text-base font-normal">{{ title | default(defaults.title) }}</span>
           </div>
         </div>
 
-        <div id="content" class="text-justify mx-8 text-base">      
+        <div id="content" class="text-justify mx-8 text-base">
           {{ content | safe }}
         </div>
       </div>
     </div>
+
     <script>
-      var startE=0;
-      document.getElementById('portrait').addEventListener('touchstart', e=>{startE=e.changedTouches[0].screenX;});
-      document.getElementById('portrait').addEventListener('touchend', e=>{ 
-        if(e.changedTouches[0].screenX < startE) {
-          document.getElementById('portrait').style.backgroundImage = "url('../photos/family.jpg')";
+      // swipe-left swaps portrait to the family photo (path is prefix-aware)
+      const portraitEl = document.getElementById('portrait');
+      let startX = 0;
+      portraitEl.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].screenX; });
+      portraitEl.addEventListener('touchend',   (e) => {
+        if (e.changedTouches[0].screenX < startX) {
+          portraitEl.style.backgroundImage = "url('{{ '/photos/family.jpg' | url }}')";
         }
       });
     </script>
